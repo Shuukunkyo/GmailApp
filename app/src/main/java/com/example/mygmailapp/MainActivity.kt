@@ -13,6 +13,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,10 +49,13 @@ fun GmailApp() {
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
+    val openDialog = remember{
+        mutableStateOf(false)
+    }
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { HomeAppBar(scaffoldState,coroutineScope) },
+        topBar = { HomeAppBar(scaffoldState,coroutineScope,openDialog) },
         drawerContent={
             GmailDrawerMenu(scrollState)
         },
